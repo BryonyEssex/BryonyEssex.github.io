@@ -22,3 +22,9 @@ Working on a project for Geology for Global Development NGO. Handwritten borehol
 {: class="portfolio-item"}
 ![Alt text](assets/projects/uk_transport.png){: style="float: left"}
 Isochrone mapping to for a UK transport consultancy. Using Isochrones to analyse hospital accessibility.
+
+
+
+{: class="portfolio-item"}
+![Alt text](assets/projects/dNBR_madeira.png){: style="float: left"}
+An assessment of fire burn severity for the 2016 fire in Madeira. This used the dNBR calculation on Landsat images from before and after the fire.
