@@ -26,5 +26,5 @@ Isochrone mapping to for a UK transport consultancy. Using Isochrones to analyse
 
 
 {: class="portfolio-item"}
-![Alt text](assets/projects/dNBR_madeira.png){: style="float: left"}
+![Alt text](assets/projects/dNBR_madeira_small.png){: style="float: left"}
 An assessment of fire burn severity for the 2016 fire in Madeira. This used the dNBR calculation on Landsat images from before and after the fire.
