@@ -8,11 +8,6 @@ subtitle: Portfolio
 ---
 
 
-{: class="portfolio-item"}
-![Alt text](assets/projects/security.png){: style="float: left"}
-Creation of a map for a security consultant.
-Created using QGIS, with input data from ACLED and UN data.
-
 
 {: class="portfolio-item"}
 ![Alt text](assets/projects/borehole.png){: style="float: left"}
