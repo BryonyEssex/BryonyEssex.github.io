@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
+    <title>LeafletMap!</title>
+
+</head>
+<body>
+    <div id= "map">
+        <div id="legend"> 
+            <svg height = "90" width="100">
+                <text x="7" y="23" style= "font-family:Arial; font-weight: bold;" > Key </text>
+                <circle cx="10" cy="40" r="4" style="color: 'black';"/>
+                <text x="20" y="43"> Places to visit </text>
+                <line x1="5" y1="50" x2="15" y2="60" style="stroke:rgb(32, 55, 62); stroke-width:6; stroke-dasharray: 4; stroke-width: 2; opacity: 0.5;" />
+                <text x="20" y="62"> Ferry journeys </text>
+                <rect width = 10 height = 9 x="5" y="72"  style="fill:rgb(255, 0, 0);fill-opacity:0.2; stroke-width:1;stroke:red" />
+                <text x="20" y="80"> Areas </text>
+            </svg>
+        </div>
+    </div>
+    
+    <style>#map {height: 800px; margin-top: 100px; margin-right: 200px; margin-left: 200px;}
+        #legend { 
+            position:absolute; 
+            bottom: 0; 
+            right: 0;
+            z-index: 1000;
+            margin-bottom: 30px;
+            margin-right: 10px;
+            background: whitesmoke;
+            opacity: 0.8;
+            border-radius: 5px ;
+            padding: 5px 10px;
+            box-shadow: 0 0 2px rgb(0 0 0/10%);
+         }
+         
+    </style>
+
+
+    <script>
+           var map = L.map('map',{
+            center: [42.2290036168279, 13.296923370563952],
+            zoom: 7
+        });
+
+            //load the OpenStreetMap/Leaflet basemap tile layer
+            var OpenStreetMap_HOT = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            //var api_key = '12a08f9d-e7f7-47e8-904f-5d8bf31d0af7';
+            //Map with stadia uses 200 credits easy
+            //var Stadia_StamenTerrain = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png?api_key=12a08f9d-e7f7-47e8-904f-5d8bf31d0af7' , {
+	           //minZoom: 0,
+	            //maxZoom: 18,
+	            //attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	           // ext: 'png'.{ext}
+            //}).addTo(map);
+
+            //var worldMAp = L.geoJson(null, {
+                //style: function(feauture) {
+                    //return{
+                       // color: "wblack",
+                        //fill: false,
+                       // opacity: 1,
+                        //clickable: false
+                    //};
+                //};
+            //});
+            //$.getJSON("data/custom.geojson", function(data){custom.addData(data);
+
+            //});
+            
+
+            var Bologna = L.circle([44.4999314677773, 11.346791858969022], {
+                color: '#990F4B',
+                opacity: 0,
+                fillColor: '#990F4B',
+                fillOpacity: 0.25,
+                radius: 15000
+            }).addTo(map);
+
+          
+            // Airports with direct flights to CY and Scotland -------'#990F4B'-------
+            //var naxosLlatlong = new L.latLong(37.20383040863337, 25.53418721879956);
+            //var naxosLabel = new L.LabelOverlay(naxosLlatlong, '<b> Naxos </b>').addTo(map);
+            
+
+            var rome = L.circle([41.89459196237965, 12.483742070417447], {
+                color: 'blue',
+                opacity: 1,
+                fillColor: '#051094',
+                fillOpacity: 0.5,
+                radius: 5000,
+            });
+
+            var milan =L.circle([45.46803892730286, 9.182412774271475], {
+                color: 'blue',
+                fillColor: '#051094',
+                fillOpacity: 0.25,
+                radius: 5000
+            });
+
+            var venice = L.circle([45.506074297980106, 12.339281224308893], {
+                color: 'blue',
+                fillColor: '051094',
+                fillOpacity: 0.3,
+                radius: 5000
+            });
+
+            var apeiranthos = L.circle([37.07154123153382, 25.52231194519468] , {
+                color: 'black',
+                fillColor: '#000000',
+                fillOpacity: 1,
+                radius: 500
+            });
+// ------------------------Athens--------------------------------------------------------
+            var athens = L.circle([43.54443712539448, 11.316241363401868], {
+                color: 'black',
+                opacity: 0,
+                fillColor: '#000000',
+                fillOpacity: 0,
+                radius: 12500
+            });
+// Dario Cecchini resturant loaction
+            var solociccia200 = L.circle([43.54443712539448, 11.316241363401868], {
+                color: '#990F4B',
+                opacity: 1,
+                fillColor: '#990F4B',
+                fillOpacity: 0.2,
+                radius: 400
+            });
+           
+            var solociccia50 = L.circle([43.54443712539448, 11.316241363401868], {
+                color: '#990F4B',
+                opacity: 1,
+                fillColor: '#990F4B',
+                fillOpacity: 0.2,
+                radius: 50
+            });
+
+            var bologna200 = L.circle([44.4999314677773, 11.346791858969022], {
+                color: '#990F4B',
+                opacity: 1,
+                fillColor: '#990F4B',
+                fillOpacity: 0.2,
+                radius: 400
+            });
+
+            var bologna50 = L.circle([44.4999314677773, 11.346791858969022], {
+                color: 'black',
+                opacity: 1,
+                fillColor: '#000000',
+                fillOpacity: 0.2,
+                radius: 50
+            });
+
+            const layerGroupZoomedOut = L.layerGroup([bologna50, solociccia50]);
+map.addLayer(layerGroupZoomedOut)
+            const layerGroupZoomedIn = L.layerGroup([bologna200, solociccia200]);
+
+///==================================makes points change size at different scales, I actyally want to make this scale dependant variable point sizing
+            map.on("zoomend", function(e) {
+                if (e.oldZoom >= 13 && map.getZoom() < 13) {
+map.removeLayer(layerGroupZoomedOut);
+map.addLayer(layerGroupZoomedIn);
+                } else if (e.oldZoom < 13 && map.getZoom() >= 13) {
+                    map.removeLayer(layerGroupZoomedIn);
+map.addLayer(layerGroupZoomedOut);
+                }
+
+
+            //    var zoomlevel = map.getZoom();
+
+            //    zoomLevel50.forEach(x => {
+            //     map.removeLayer(x);
+            //    });   const zoomLevel200 = [
+            //     bologna200,
+            //     solociccia200,
+            // ]
+
+            //    if (zoomlevel < 13) {
+            //        zoomLevel50.forEach(thing => map.addLayer(thing));
+            //    } else {
+            //     zoomLevel200.forEach(x => map.addLayer(x))
+            //    }
+
+            //     if (zoomlevel < 13) {
+            //         if (map.hasLayer(bologna50)) {
+            //             map.removeLayer(bologna50);
+            //             map.removeLayer(solociccia50); // this bit is probs wrong
+            //             map.addLayer(bologna200);
+            //             map.addLayer(solociccia200);
+            //         }else {
+            //             map.addLayer(bologna200);
+            //             map.addLayer(solociccia200);
+            //         }
+            //     }
+            //     if (zoomlevel >= 13) { // no owrk
+            //        if (map.hasLayer(parthenon200)) {
+            //             map.removeLayer(parthenon200);
+            //             map.removeLayer(natAchaologicalMuseum200);
+            //             map.addLayer(parthenon50);
+            //             map.addLayer(natAchaologicalMuseum50);
+            //         }else {
+            //             map.addLayer(parthenon50);
+            //             map.addLayer(natAchaologicalMuseum50);
+            //         }
+            //     }
+            });
+            ///var plaka = L.circle([37.97252344011427, 23.73047799587112], {
+               // color: 'red',
+               // opacity: 0.4,
+               // fillColor: 'blue',
+               // fillOpacity: 0.2,
+               // radius: 500
+            //}).addTo(map);
+
+            //var exarcheia = L.circle([37.98713655746127, 23.737730977122382], {
+               /// color: 'red',
+               // opacity: 0.4,
+               // fillColor: 'red',
+               // fillOpacity: 0.2,
+              //  radius: 400
+            //}).addTo(map);
+
+
+            //=========================================Polygon areas in Athens===============================================
+            var latLong = [[37.988922950522394, 23.74779951843154],[37.982631628924686, 23.735010745497565],[37.986217071862576, 23.731877925282195],[37.98651738465834, 23.73013617223824],[37.99125282901732, 23.73135000150867],[37.99146806922559, 23.731926570412117], [37.988922950522394, 23.74779951843154]];
+
+            var polygonATH = L.polygon(latLong, {color: 'red'})
+
+            var latLongPlaka = [[37.97352826206726, 23.732825147723908],[37.97367179027315, 23.73088302089123], [37.9735521834544, 23.73284032058979],[37.97198531612949, 23.73361413674969],[37.97047822134697, 23.73174787424641],
+            [37.969569165090306, 23.730731292232427], [37.969545242405225, 23.729274697107915], [37.97243983070555, 23.727939484910447], [37.97303787191289, 23.726695309908262],
+            [37.97284649925662, 23.72519319618611], [37.97345649785905, 23.725102158990833], [37.97348041926957, 23.724601454416778], [37.97411433380811, 23.724510417221495],
+            [37.97352826206726, 23.732825147723908] ];
+
+            var polyPlaka = L.polygon(latLongPlaka, {color: 'red'})
+////////////========== this section turns the polygons on and off at different scales
+            map.on("zoomend", function() {
+                var zoomlevel = map.getZoom();
+                if (zoomlevel < 11) {
+                    if (map.hasLayer(polyPlaka)) {
+                        map.removeLayer(polyPlaka);
+                    }else {
+                        concole.log("no plaka place active");
+                    }
+                }
+                if (zoomlevel >= 11) {
+                    if (map.hasLayer(polyPlaka)) {
+                        console.log ("layer already added");
+                    } else {
+                        map.addLayer(polyPlaka);
+                    }
+                }
+            })
+            map.on("zoomend", function() {
+                var zoomlevel = map.getZoom();
+                if (zoomlevel < 11) {
+                    if (map.hasLayer(polygonATH)) {
+                        map.removeLayer(polygonATH);
+                    }else {
+                        concole.log("no plaka place active");
+                    }
+                }
+                if (zoomlevel >= 11) {
+                    if (map.hasLayer(polygonATH)) {
+                        console.log ("layer already added");
+                    } else {
+                        map.addLayer(polygonATH);
+                    }
+                }
+            })
+
+            // adding a marker
+            //santorini.bindPopup("<b>Santorini</b>");
+            santVolcano.bindPopup("<b>Santorini Volcano</b>" + '<br> Lol need to research this ');
+            akrotiri.bindPopup("<b>Akrotiri:</b>&nbspprehistoric city" +  '<br> <a href="https://en.wikipedia.org/wiki/Akrotiri_(prehistoric_city)" >Wiki</a>');
+            //naxos.bindPopup("<b>Naxos</b>");
+            //athens.bindPopup("Athens");
+           // parthenon200.bindPopup("Acropolis & Parthenon" + '<br> <a href = "https://www.acropolis-tickets.com/" >Ticket info</a>' + '<br> Sunday dawn/dusk they raise a flag and wear trad dress also at the tomb of the unknown soldier On Sunday at 11am, a whole platoon marches down Vasilissis Sofias to the tomb, accompanied by a band. ');
+            //parthenon50.bindPopup("Acropolis & Parthenon" + '<br> <a href = "https://www.acropolis-tickets.com/" >Ticket info</a>' + '<br> Sunday dawn/dusk they raise a flag and wear trad dress also at the tomb of the unknown soldier On Sunday at 11am, a whole platoon marches down Vasilissis Sofias to the tomb, accompanied by a band. ');
+            natAchaologicalMuseum200.bindPopup("Achaological Museum" + '<br> <a href = "https://www.namuseum.gr/" >Ticket& info</a>' );
+            natAchaologicalMuseum50.bindPopup("Achaological Museum" + '<br> <a href = "https://www.namuseum.gr/" >Ticket& info</a>' );
+            polyPlaka.bindPopup("<b> Plaka: </b>&nbspOld District" + '<br> <a href = "https://en.wikipedia.org/wiki/Plaka" >Wiki</a>'+ '<br> theres also a tiny pituresque village enar by- Anafiotika');
+            polygonATH.bindPopup("<b> Exarcheia</b>" + '<br> <a href = "https://www.thisisathens.org/neighbourhoods/exarchia-locals-guide" >Locals Guide</a>'+ '<br> Interesting area, lamda project greek school is here');
+            dementerTemple.bindPopup(" Dementer Temple");
+            chalkio.bindPopup("Montain vallages: Chalkio");
+            apeiranthos.bindPopup("Montain vallages: Apeiranthos" + '<br> <a href="https://www.bing.com/images/search?q=Apeiranthos%2C+naxos&qs=n&form=QBIR&sp=-1&lq=0&pq=apeiranthos%2C%20naxos&sc=4-18&cvid=1136B2224EC04DAF9E34A855563135BC&ghsh=0&ghacc=0&first=1&cw=2537&ch=1314" >Pics</a>');
+            ///polygon.bindPopup("I am a polygon.");
+            //loading a pop up at a set location, as a layer
+
+            // could make lines zoom level dependant?
+            var myLines =[{
+                "type": "LineString",
+                "coordinates": [[23.668231009038845, 37.941],[23.74, 37.7], [24.41, 36.93],[25.376, 36.41]]
+            }];
+            L.geoJson(myLines, {color: '#528C9E', dashArray: '4', opacity: '0.5'})//.addTo(map);
+
+           
+            var santNaxos =[{
+                "type": "LineString",
+                "coordinates": [[25.427, 36.3866],[25.332783909066073, 37.07972972037203] ]
+            }];
+            L.geoJson(santNaxos, {color: '#528C9E', dashArray: '4', opacity: '0.5'}).addTo(map);
+
+            var naxAthens =[{
+                "type": "LineString",
+                "coordinates": [[25.332783909066073, 37.07972972037203],[24.029548221952936, 37.43069687731781],[23.74, 37.7],
+                [23.668231009038845, 37.941]]
+            }];
+            L.geoJson(naxAthens, {color: '#528C9E', dashArray: '4', opacity: '0.5'}).addTo(map);
+
+            var exarcheiaLatLong = [[23.747, 37.99],[23.7, 37.98],[23.7, 38.8],[23.7, 37.9],[ 23.73, 37.9],[23.731, 37.9], [23.747, 37.99]];
+            var polygon = L.polygon(exarcheiaLatLong, {color: 'red'}).addTo(map);
+        
+            
+
+           // var exarcheiaPolygon = [{
+             //   "type": "Polygon",
+               // "coordinates": [[37.988922950522394, 23.74779951843154],[37.982631628924686, 23.735010745497565],[37.986217071862576, 23.731877925282195],[37.98651738465834, 23.73013617223824],[37.99125282901732, 23.73135000150867],[37.99146806922559, 23.731926570412117], [37.988922950522394, 23.74779951843154]]
+            //}];
+            //L.geoJson(exarcheiaPolygon, {color: 'red'}).addTo(map);
+
+            
+    </script>
+</body>
+</html>
